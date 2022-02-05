@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Edit Planet</h1>
+    <form action ="/planets/<%= planet._id  %>?_method=PUT " method="POST">
+        <div>
+            <label for="pname">Name</label>
+            <input type="text" id="title" name="planet[pname]" value="<%= planet.pname %>">
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <textarea type="text" id="description" name="planet[description]"><%= planet.description %> </textarea>
+        </div>
+        <button>Discover Planet</button>
+    </form>
+</body>
+</html>
