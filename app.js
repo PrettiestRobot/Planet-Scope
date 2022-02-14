@@ -69,45 +69,45 @@ app.use((req, res, next) => {
 // --------------
 
 //INDEX
-app.get('/planets', async (req, res) => {
+app.get('/planets', catchAsync(async (req, res) => {
     const planets = await Planet.find({});
     res.render('planets/index', { planets });
-})
+}));
 //NEW
 app.get('/planets/new', (req, res) => {
     res.render('planets/new');
-})
+});
 
-app.post('/planets', async (req, res) => {
+app.post('/planets', catchAsync(async (req, res) => {
     const planet = new Planet(req.body.planet);
     await planet.save();
     res.redirect(`/planets/${planet._id}`); 
-})
+}));
 //SHOW
-app.get('/planets/:id', async (req, res) => {
-    const planet = await Planet.findById(req.params.id);
+app.get('/planets/:id', catchAsync(async (req, res) => {
+    const planet = await Planet.findById(req.params.id).populate('author');
     res.render('planets/show', { planet });
 
-})
+}));
 //EDIT
-app.get('/planets/:id/edit', async (req, res) => {
+app.get('/planets/:id/edit', catchAsync(async (req, res) => {
     const planet = await Planet.findById(req.params.id)
     res.render('planets/edit', { planet });
-})
+}));
 
-app.put('/planets/:id', async (req, res) => {
+app.put('/planets/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
     const planet = await Planet.findByIdAndUpdate(id, { ...req.body.planet });
     res.redirect(`/planets/${planet._id}`)
-});
+}));
 
 //DESTROY
 
-app.delete('/planets/:id', async (req, res) => {
+app.delete('/planets/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
     await Planet.findByIdAndDelete(id);
     res.redirect('/planets');
-})
+}));
 
 // -----------
 // USER ROUTES

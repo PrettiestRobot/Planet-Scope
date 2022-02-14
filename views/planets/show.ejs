@@ -1,6 +1,7 @@
 <% layout('layouts/boilerplate') %> 
-    
+    <img src="<%= planet.image %>">
     <h1><%= planet.pname %> </h1>
+    <p>"Discovered by: "<%= planet.author.username %></p>
     <p><%= planet.description %> </p>
     <p> <a href="/planets/<%=planet._id%>/edit">Edit</a>
     </p>
